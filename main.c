@@ -6,10 +6,10 @@
 struct EmployeeInformation //员工数据类 
 {
 int wage; //工资 
-char name[10]; //姓名 
+char name[12]; //姓名 
 char gender[4]; //性别 
-char department[10]; //部门 
-char position[10]; //职位 
+char department[12]; //部门 
+char position[12]; //职位 
 char number[8]; //职工号 
 }em[100];
 
@@ -51,7 +51,9 @@ void main(void)
 			else
 			{
 				flag=0;
-				printf("您输入有误，请重试!");
+				printf("您输入有误，请按任意键重试!");
+				getch() ;
+				system("cls");
 			}
 		}while(flag==0);
 			
@@ -96,7 +98,8 @@ void main(void)
 	
 	la:
 		system("cls"); 
-		printf("\n\n\n====================谢谢使用！====================\n\n\n");
+		printf("\n\n====================谢谢使用！====================\n\n");
+		printf("\n==============作者：软件1803 郭晨霞===============\n\n");
 		printf("按任意键推出...\n"); 
 		getch();
 	
@@ -132,7 +135,7 @@ void menu() //菜单
 
 void input() //录入职工信息
 {
-	int i,m,b=0;
+	int i,m,k=0;
 	char s;
 	char st[10]="";
 	printf("请输入需要创建信息的职工人数(1--100):\n");
@@ -149,8 +152,8 @@ void input() //录入职工信息
 			if(s>47 && s<58)
 			{
 				printf("%c",s);
-				st[b]=s;
-				b++;
+				st[k]=s;
+				k++;
 			}
 			else if(s==13 && s==0)
 			{
@@ -166,9 +169,9 @@ void input() //录入职工信息
 			}
 			
 			
-		}while(b<6);
+		}while(k<6);
 		strcpy(em[i].number,st);
-		//scanf("%d",&em[i].number); 
+		
 		printf("\n");
 		printf("请输入姓名: ");
 		scanf("%s",em[i].name);
@@ -277,10 +280,11 @@ void display() //浏览数据
 		 
 	}while(1);
 	
-	printf("\n %s\t\t\t %s\t\t %s\t\t %s\t\t %s\t\t %s\t\t \n","职工号","姓 名","性 别","部 门","职 位","基本工资");
+	printf("\n % -6s\t\t % -8s\t\t % -2s\t\t % -8s\t\t % -8s\t\t %s\t\t \n","职工号","姓 名","性 别","部 门","职 位","基本工资");
 	for(i=0;i<m;i++)
 	{ 
-		printf("\n %s\t\t\t %s\t\t %s\t\t %s\t\t %s\t\t %d\n",em[i].number,em[i].name,em[i].gender,em[i].department,em[i].position,em[i].wage); 
+		printf("\n % -6s\t\t % -8s\t\t % -2s\t\t % -8s\t\t % -8s\t\t %d\n",em[i].number,em[i].name,em[i].gender,em[i].department,em[i].position,em[i].wage); 
+		
 	} 
 	printf("按任意键继续\n");
 	getch();
@@ -292,19 +296,19 @@ void del() //删除数据
 
 	int m=read();
 	int i,j,n,t,flag;
-	char name1[10];
+	char number[8];
 	printf("\n 原来的职工信息:\n");
 	display(); 
 	printf("\n");
-	printf("请输入要删除的职工的姓名:\n");
-	scanf("%s",name1);
+	printf("请输入要删除的职工的职工号:\n");
+	scanf("%s",number);
 	for(flag=1,i=0;flag&&i<m;i++)
 	{
-		if(strcmp(em[i].name,name1)==0)
+		if(strcmp(em[i].number,number)==0)
 		{
 			printf("\n已找到此人，原始记录为：\n");
-			printf("\n %s\t\t\t %s\t\t %s\t\t %s\t\t %s\t\t %s\t\t \n","职工号","姓 名","性 别","部 门","职 位","基本工资");
-			printf("\n %s\t\t\t %s\t\t %s\t\t %s\t\t %s\t\t %d\n",em[i].number,em[i].name,em[i].gender,em[i].department,em[i].position,em[i].wage); 
+			printf("\n % -6s\t\t % -8s\t\t % -2s\t\t % -8s\t\t % -8s\t\t %s\t\t \n","职工号","姓 名","性 别","部 门","职 位","基本工资");
+			printf("\n % -6s\t\t % -8s\t\t % -2s\t\t % -8s\t\t % -8s\t\t %d\n",em[i].number,em[i].name,em[i].gender,em[i].department,em[i].position,em[i].wage); 
 			printf("\n确实要删除此人信息请按1,不删除请按0\n");
 			scanf("%d",&n);
 			if(n==1) 
@@ -343,25 +347,25 @@ void del() //删除数据
 
 void search() //查询数据 
 {
-	char name1[10];
+	char number[8];
 	int i,t,flag=0;
 	int m=read();
-	printf("请输入要查找的姓名:\n");
-	scanf("%s",name1);
+	printf("请输入要查找的职工号:\n");
+	scanf("%s",number);
 	system("cls");
 	for(i=0;i<m;i++)
 	{
 	
-		if(strcmp(name1,em[i].name)==0)
+		if(strcmp(number,em[i].number)==0)
 		{
 			flag=1;
 					
-			printf("\n %s\t\t\t %s\t\t %s\t\t %s\t\t %s\t\t %s\t\t \n","职工号","姓 名","性 别","部 门","职 位","基本工资");
-			printf("\n %s\t\t\t %s\t\t %s\t\t %s\t\t %s\t\t %d\n",em[i].number,em[i].name,em[i].gender,em[i].department,em[i].position,em[i].wage); 
+			printf("\n % -6s\t\t % -8s\t\t % -2s\t\t % -8s\t\t % -8s\t\t %s\t\t \n","职工号","姓 名","性 别","部 门","职 位","基本工资");
+			printf("\n % -6s\t\t % -8s\t\t % -2s\t\t % -8s\t\t % -8s\t\t %d\n",em[i].number,em[i].name,em[i].gender,em[i].department,em[i].position,em[i].wage);
 			//break;
 		} 
 	}
-	if(flag=0) 
+	if(flag==0) 
 	{
 		printf("\n对不起，查无此人\n");
 	}
@@ -380,44 +384,53 @@ void search() //查询数据
 
 void modify() //修改数据 
 {
-	int number; 
+	char number[8]; 
 	char name[10];
-	char gender[2];
+	char gender[4];
 	char department[10];
 	char position[10];
 	int wage;
-	int b,c,i,n,t,flag; 
+	int b,c,i,n,t,flag,k=0; 
 	int m=read(); 
 	char s;
 	char st[10];
 	printf("\n 原职工信息:\n");
 	display();
 	printf("\n");
-	printf("请输入要修改的职工的姓名:\n");
-	scanf("%s",name);
+	printf("请输入要修改的职工的职工号:\n");
+	scanf("%s",number);
+	getchar();
 	for(flag=1,i=0;flag&&i<m;i++)
 	{
-		if(strcmp(em[i].name,name)==0)
+		if(strcmp(em[i].number,number)==0)
 		{
 			printf("\n已找到此人，原始记录为：\n");
-			printf("\n %s\t\t\t %s\t\t %s\t\t %s\t\t %s\t\t %s\t\t \n","职工号","姓 名","性 别","部 门","职 位","基本工资");
-			printf("\n %s\t\t\t %s\t\t %s\t\t %s\t\t %s\t\t %d\n",em[i].number,em[i].name,em[i].gender,em[i].department,em[i].position,em[i].wage); 
+			printf("\n % -6s\t\t % -8s\t\t % -2s\t\t % -8s\t\t % -8s\t\t %s\t\t \n","职工号","姓 名","性 别","部 门","职 位","基本工资");
+			printf("\n % -6s\t\t % -8s\t\t % -2s\t\t % -8s\t\t % -8s\t\t %d\n",em[i].number,em[i].name,em[i].gender,em[i].department,em[i].position,em[i].wage);
 			printf("\n确实要修改此人信息请按1 ; 不修改请按0\n");
 			scanf("%d",&n);
 			if(n==1)
 			{
-				printf("\n需要进行修改的选项\n 1.职工号 2.姓名 3.性别 4.部门 5.职位 6.基本工资\n"); 
-				printf("请输入你想修改的那一项序号:\n"); 
-				scanf("%d",&c); 
-				if(c>6||c<1)
-				{ 
-					printf("\n选择错误，请重新选择!\n"); 
-				} 
+				do
+				{
+					
+					printf("\n需要进行修改的选项\n 1.职工号 2.姓名 3.性别 4.部门 5.职位 6.基本工资\n"); 
+					printf("请输入你想修改的那一项序号:\n"); 
+					scanf("%d",&c); 
+					if(c>6||c<1)
+					{ 
+						printf("\n选择错误，请按任意键重新选择!\n"); 
+						system("cls") ;
+					} 
+				}while(c>6||c<1);
+				
 			}
 			flag=0;
+		
 		}
 	
 	}
+	
 	if(flag==1)
 	{ 
 		printf("\n对不起，查无此人!\n"); 
@@ -437,8 +450,8 @@ void modify() //修改数据
 					if(s>47 && s<58)
 					{
 						printf("%c",s);
-						st[b]=s;
-						b++;
+						st[k]=s;
+						k++;
 					}
 					else if(s==13 && s==0)
 					{
@@ -454,7 +467,7 @@ void modify() //修改数据
 					}
 					
 					
-				}while(b<8);
+				}while(k<8);
 				strcpy(em[i-1].number,st);
 				
 				break; 
@@ -565,11 +578,11 @@ void sort() //数据分类
 	for(i=0;i<j+1;i++)
 	{
 		printf("职位：%s\n",posi[i].str);
-		printf("\n %s\t\t\t %s\t\t %s\t\t %s\t\t %s\t\t %s\t\t \n","职工号","姓 名","性 别","部 门","职 位","基本工资");
+		printf("\n \t% -6s\t\t % -8s\t\t % -2s\t\t % -8s\t\t % -8s\t\t %s\t\t \n","职工号","姓 名","性 别","部 门","职 位","基本工资");
+			
 		for(h=0;h<c[i];h++)
 		{
-	
-			printf("\n %s\t\t\t %s\t\t %s\t\t %s\t\t %s\t\t %d\n",em[i].number,em[i].name,em[i].gender,em[i].department,em[i].position,em[i].wage); 
+			printf("\n \t% -6s\t\t % -8s\t\t % -2s\t\t % -8s\t\t % -8s\t\t %d\n",em[i].number,em[i].name,em[i].gender,em[i].department,em[i].position,em[i].wage);
 			k++;
 		}
 	}
