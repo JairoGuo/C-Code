@@ -99,7 +99,7 @@ void main(void)
 	la:
 		system("cls"); 
 		printf("\n\n====================谢谢使用！====================\n\n");
-		printf("\n==============作者：软件1803 郭晨霞===============\n\n");
+		printf("\n==============作者：软件(三)班 郭晋儒===============\n\n");
 		printf("按任意键推出...\n"); 
 		getch();
 	
@@ -143,7 +143,10 @@ void input() //录入职工信息
 	system("cls");
 	for(i=0;i<m;i++)
 	{
+		k=0;
+		st[0]='\0';
 		printf("请输入职工号： ");
+		
 		do
 		{
 		
@@ -330,11 +333,15 @@ void del() //删除数据
 	{
 	
 		printf("\n对不起，查无此人!\n");
+	}
+	if(flag==0)
+	{
+		printf("\n 浏览删除后的所有职工信息:\n");
+		save(m,1); 
+		display(); 
 	} 
-	printf("\n 浏览删除后的所有职工信息:\n");
-	save(m,1); 
-	display(); 
-	printf("\n继续删除请按1，推出请按0\n");
+	
+	printf("\n继续删除请按1，退出请按0\n");
 	scanf("%d",&t);
 	switch(t)
 	{
@@ -347,16 +354,16 @@ void del() //删除数据
 
 void search() //查询数据 
 {
-	char number[8];
+	char name[8];
 	int i,t,flag=0;
 	int m=read();
-	printf("请输入要查找的职工号:\n");
-	scanf("%s",number);
+	printf("请输入要查找的姓名:\n");
+	scanf("%s",name);
 	system("cls");
 	for(i=0;i<m;i++)
 	{
 	
-		if(strcmp(number,em[i].number)==0)
+		if(strcmp(name,em[i].name)==0)
 		{
 			flag=1;
 					
@@ -495,7 +502,7 @@ void modify() //修改数据
 				
 			} 
 			printf("\n");
-			printf("\n是否确定所修改的信息?\n 是 请按1 ; 不,重新修改 请按0: \n"); 
+			printf("\n是否确定所修改的信息?\n 是 请按1 ; 不,重新输入 请按0: \n"); 
 			scanf("%d",&b);
 		
 		}while(b==0);
@@ -551,12 +558,13 @@ int cmp_d(const void *a,const void *b) //降序规则
 void sort() //数据分类 
 {
 	int m=read();
-	char s[10]; 
+
 	char tp[10];
 	int i,j=0;
 	int c[10]={0};
 	int h,k=0;
 	qsort(em,m,sizeof(struct EmployeeInformation),cmp);
+
 	strcpy(tp,em[j].position);
 	
 	for(i=0;i<m;i++)
@@ -582,7 +590,7 @@ void sort() //数据分类
 			
 		for(h=0;h<c[i];h++)
 		{
-			printf("\n \t% -6s\t\t % -8s\t\t % -2s\t\t % -8s\t\t % -8s\t\t %d\n",em[i].number,em[i].name,em[i].gender,em[i].department,em[i].position,em[i].wage);
+			printf("\n \t% -6s\t\t % -8s\t\t % -2s\t\t % -8s\t\t % -8s\t\t %d\n",em[k].number,em[k].name,em[k].gender,em[k].department,em[k].position,em[k].wage);
 			k++;
 		}
 	}
@@ -593,8 +601,7 @@ void sort() //数据分类
 
 int cmp(const void *a,const void *b) //职位排序规则 
 {
-	
+	printf( "%d",strcmp( (*(struct EmployeeInformation *)a).position , (*(struct EmployeeInformation *)b).position ));
 	return strcmp( (*(struct EmployeeInformation *)a).position , (*(struct EmployeeInformation *)b).position ); 
 	
 }
-
